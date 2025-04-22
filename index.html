@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Tattoo Portfolio</title>
+</head>
+
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <script>
+    let attempt = 0;
+    let lockout = false;
+
+    function login() {
+      if (lockout) {
+        alert("Please wait 10 seconds before trying again.");
+        return;
+      }
+
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      const correctUser = "admin123";
+      const correctPass = "admin123";
+
+      if (user === correctUser && pass === correctPass) {
+        alert("Login Successful!");
+        window.location.href = "home.html";
+      } else {
+        attempt++;
+        if (attempt === 1) {
+          alert("Wrong username or password. Try again.");
+        } else if (attempt === 2) {
+          alert("Wrong again! Please wait 10 seconds to retry.");
+          lockout = true;
+          setTimeout(() => {
+            lockout = false;
+            attempt = 0; 
+          }, 10000);
+        }
+      }
+    }
+  </script>
+
+</body>
+<style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #222;
+      color: #fff;
+      padding: 70px;
+      border-radius: 10px;
+      width: 370px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      text-align: center;
+      color: darkred;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 107%;
+      padding: 12px;
+      background-color: darkred;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
+</html>
